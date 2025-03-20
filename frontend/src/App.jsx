@@ -19,14 +19,22 @@ function App() {
       <div className="bg-gray-900 h-full text-white p-2 relative">
         <Router>
           <Routes>
-            <Route expct path="/" element={<Signup />}>
+            {/* <Route expct path="/" element={<Signup />}>
               <Route index element={<AllTasks />} />
               <Route path='/importantTasks' element={<ImportantTasks />} />
               <Route path='/completedTasks' element={<CompletedTasks />} />
               <Route path='/incompletedTasks' element={<IncompletedTasks />} />
               <Route path='/login' element={<Login />} />
               <Route path='/dashboard' element={<Dashboard />} />
+            </Route> */}
+            <Route exact path="/" element={<Dashboard />}>
+              <Route index element={<AllTasks />} />
+              <Route path='/importantTasks' element={<ImportantTasks />} />
+              <Route path='/completedTasks' element={<CompletedTasks />} />
+              <Route path='/incompletedTasks' element={<IncompletedTasks />} />
             </Route>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Router>
       </div>
