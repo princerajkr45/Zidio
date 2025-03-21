@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -14,6 +15,11 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+
+  if (isLoggedIn === true) {
+    navigate("/dashboard");
+  }
 
   const validateForm = () => {
     let newErrors = {};

@@ -1,11 +1,22 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch ,useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { authActions } from "../store/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+ 
+  if (isLoggedIn === true){
+    navigate("/dashboard");
+  }
 
   const validateForm = () => {
     let newErrors = {};
@@ -21,15 +32,36 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setLoading(true);
-    setTimeout(() => {
-      alert("Login Successful! 🎉");
-      setLoading(false);
-    }, 1500);
+
+    try {
+      const response = await axios.post("http://localhost:5005/api/users/login", { email, password });
+     
+      if (response.data.token) {
+
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("userId", response.data.user.id);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        dispatch(authActions.login())
+        navigate("/dashboard");
+      } else {
+        setErrors({ apiError: "Login failed. Please try again." });
+      }
+    } catch (error) {
+      if (error.response) {
+        setErrors({ apiError: error.response.data.message });
+      } else {
+        setErrors({ apiError: "Something went wrong!" });
+      }
+    }
+    finally {
+      setLoading(false); // Stop loading
+    }
+
   };
 
   return (
@@ -42,7 +74,7 @@ export default function Login() {
             <label className="block text-gray-700">Email</label>
             <input
               type="email"
-              className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none 
+              className={`w-full mt-2 px-4 py-2 border text-gray-700 rounded-lg focus:outline-none 
                 ${errors.email ? "border-red-500" : "border-gray-300 focus:border-blue-500"}`}
               placeholder="Enter your email"
               value={email}
@@ -56,7 +88,7 @@ export default function Login() {
             <label className="block text-gray-700">Password</label>
             <input
               type="password"
-              className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none
+              className={`w-full mt-2 px-4 py-2 text-gray-700 border rounded-lg focus:outline-none
                 ${errors.password ? "border-red-500" : "border-gray-300 focus:border-blue-500"}`}
               placeholder="Enter your password"
               value={password}

@@ -4,31 +4,8 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoIosAddCircle } from "react-icons/io";
 
-function Cards({ addTask, setInputDiv }) {
-    const data = [
-        {
-            title: 'Task 1',
-            description: 'This is a sample task that will be executed when the task is executed successfully and will be executed when the task is executed successfully',
-            status: 'In Complete'
-        },
-        {
-            title: 'Task 2',
-            description: 'Another sample task that will be executed when the task is executed successfully and will be',
-            status: 'Completed'
-        },
-        {
-            title: 'Task 3',
-            description: 'Yet another sample task that will be executed when the task is executed successfully and will',
-            status: 'In Complete'
-        },
-        {
-            title: 'Task 4',
-            description: 'Last sample task that will be executed when the task is executed successfully',
-            status: 'In Complete',
-        }
-    ];
-
-    // const [In ] = useState("Incomplete")
+function Cards({ addTask, setInputDiv , data }) {
+   
     return (
         <div className='grid grid-cols-3 gap-4 p-4'>
             {data && data.map((items, i) => (
@@ -38,8 +15,8 @@ function Cards({ addTask, setInputDiv }) {
                         <p className='text-gray-400 my-2'>{items.description}</p>
                     </div>
                     <div className="mt-2 w-full flex">
-                        <button className={`${items.status === "In Complete" ? "bg-red-500" : "bg-green-800"} px-3 py-2 rounded w-3/6`}>
-                        {items.status}
+                        <button className={`${items.complete === false ? "bg-red-500" : "bg-green-800"} px-3 py-2 rounded w-3/6`}>
+                        {items.complete ? "Completed" : "In Complete"}
                         </button>
                         <div className='text-white text-2xl p-2 w-3/6  bg-gray-800 flex justify-around items-center'>
                             <button>
