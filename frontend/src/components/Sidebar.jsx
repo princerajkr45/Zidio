@@ -62,7 +62,7 @@ function Sidebar() {
         {
             title: 'Incompleted Tasks',
             icon: <TbNotebookOff />,
-            link: '/dashboard/incompletedtasks',
+            link: '/dashboard/inCompletedtasks',
 
         },
     ]

@@ -12,6 +12,7 @@ import Signup from './pages/SignUp'
 import Login from './pages/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { authActions } from './store/auth'
+import InCompletedTasks from './pages/IncompletedTasks'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -47,7 +48,8 @@ function App() {
             <Route index element={<AllTasks />} />
             <Route path='/dashboard/importantTasks' element={<ImportantTasks />} />
             <Route path='/dashboard/completedTasks' element={<CompletedTasks />} />
-            <Route path='/dashboard/incompletedTasks' element={<IncompletedTasks />} />
+            <Route path='/dashboard/incompletedTasks' element={<InCompletedTasks />} />
+            
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
