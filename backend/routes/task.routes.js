@@ -5,6 +5,7 @@ import {
     getAllTasks, 
     getCompletedTasks, 
     getImportantTasks, 
+    getInCompletedTasks, 
     updateCompleteTask, 
     updateImportantTask, 
     updateTask } 
@@ -22,5 +23,6 @@ router.put('/update-imp-task/:taskId',verifyJWT,updateImportantTask);
 router.put('/update-complete-task/:taskId',verifyJWT,updateCompleteTask);
 router.get('/get-imp-tasks',verifyJWT, getImportantTasks);
 router.get('/get-complete-tasks',verifyJWT, getCompletedTasks);
+router.get('/get-incomplete-tasks',verifyJWT, getInCompletedTasks);
 
 export default router;

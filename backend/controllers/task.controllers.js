@@ -158,6 +158,21 @@ const getCompletedTasks = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+// Get InComplete tasks
+const getInCompletedTasks = async (req, res) => {
+    try {
+        const { id } = req.headers;
+        const userData = await User.findById(id).populate({
+            path: "tasks",
+            match: { complete: false },
+            options: { sort: { createdAt: -1 } },
+        });
+        const completeTasksData = userData.tasks;
+        res.status(200).json({ data: completeTasksData });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 export { 
     addTask, 
     getAllTasks, 
@@ -166,5 +181,6 @@ export {
     updateImportantTask , 
     updateCompleteTask , 
     getImportantTasks,
-    getCompletedTasks
+    getCompletedTasks,
+    getInCompletedTasks
 }
