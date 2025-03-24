@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-gray-900 h-full text-white p-2 relative">
+      <div className="bg-gray-900  text-white">
 
         <Routes>
           {/* <Route expct path="/" element={<Signup />}>
