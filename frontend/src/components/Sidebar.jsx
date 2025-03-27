@@ -47,28 +47,28 @@ function Sidebar() {
         {
             title: 'All Tasks',
             icon: <CgNotes />,
-            link: '/dashboard',
+            link: '/taskdashboard',
         },
         {
             title: 'Important Tasks',
             icon: <MdLabelImportant />,
-            link: '/dashboard/importantTasks',
+            link: '/taskdashboard/importantTasks',
         },
         {
             title: 'Completed Tasks',
             icon: <FaCheckDouble />,
-            link: '/dashboard/completedTasks',
+            link: '/taskdashboard/completedTasks',
         },
         {
             title: 'Incompleted Tasks',
             icon: <TbNotebookOff />,
-            link: '/dashboard/inCompletedtasks',
+            link: '/taskdashboard/inCompletedtasks',
 
         },
     ]
     return (
         <>
-           <div>
+           <div className='pt-3'>
                 <div className='text-center '>
                     <h2 className='text-2xl uppercase pb-2'>{Data.name}</h2>
                     <h4 className='pb-2'>{Data.email}</h4>
@@ -87,7 +87,7 @@ function Sidebar() {
                 </div>
            </div>
             <div>
-                <button className='w-full p-2 bg-gray-600 rounded hover:bg-gray-400 transition-all duration-300 cursor-pointer' onClick={logout}>Log out</button>
+                <button className='w-full p-2 bg-gray-800 text-white rounded hover:bg-gray-400 transition-all duration-300 cursor-pointer' onClick={logout}>Log out</button>
             </div>
         </>
     )

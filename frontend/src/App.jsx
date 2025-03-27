@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes, BrowserRouter as Router, useNavigate } from 'react-router-dom'
-import Dashboard from './components/Dashboard'
+import TaskDashboard from './components/TaskDashboard'
 import AllTasks from './pages/AllTasks'
 import ImportantTasks from './pages/ImportantTasks'
 import CompletedTasks from './pages/CompletedTasks'
@@ -13,6 +13,9 @@ import Login from './pages/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { authActions } from './store/auth'
 import InCompletedTasks from './pages/IncompletedTasks'
+import UserDashboard from './userdashboard/UserDashboard'
+import Notes from './userdashboard/Notes'
+import Home from './userdashboard/Home'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,7 +36,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-gray-900  text-white">
+      <div className="">
 
         <Routes>
           {/* <Route expct path="/" element={<Signup />}>
@@ -44,15 +47,20 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/dashboard' element={<Dashboard />} />
             </Route> */}
-          <Route exact path="/dashboard" element={<Dashboard />}>
+          <Route exact path="/taskdashboard" element={<TaskDashboard />}>
             <Route index element={<AllTasks />} />
-            <Route path='/dashboard/importantTasks' element={<ImportantTasks />} />
-            <Route path='/dashboard/completedTasks' element={<CompletedTasks />} />
-            <Route path='/dashboard/incompletedTasks' element={<InCompletedTasks />} />
+            <Route path='/taskdashboard/importantTasks' element={<ImportantTasks />} />
+            <Route path='/taskdashboard/completedTasks' element={<CompletedTasks />} />
+            <Route path='/taskdashboard/incompletedTasks' element={<InCompletedTasks />} />
             
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/user-dashboard' element={<UserDashboard />}>
+            <Route index element={<Home />} />
+            <Route path='/user-dashboard/notes' element={<Notes />} />
+
+          </Route>
         </Routes>
 
       </div>

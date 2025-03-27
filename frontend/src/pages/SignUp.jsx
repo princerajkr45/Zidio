@@ -97,7 +97,7 @@ export default function Signup() {
               <label className="block font-medium text-[#2D336B]">Name</label>
               <input
                 type="text"
-                className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none 
+                className={`w-full mt-2 px-4 py-2 text-black border rounded-lg focus:outline-none 
             ${errors.name ? "border-red-500" : "border-gray-300 focus:border-[#2D336B]"}`}
                 placeholder="Enter your name"
                 value={name}
@@ -111,7 +111,7 @@ export default function Signup() {
               <label className="block font-medium text-[#2D336B]">Email</label>
               <input
                 type="email"
-                className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none 
+                className={`w-full mt-2 px-4 py-2 text-black border rounded-lg focus:outline-none 
             ${errors.email ? "border-red-500" : "border-gray-300 focus:border-[#2D336B]"}`}
                 placeholder="Enter your email"
                 value={email}
@@ -125,7 +125,7 @@ export default function Signup() {
               <label className="block font-medium text-[#2D336B]">Password</label>
               <input
                 type="password"
-                className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none 
+                className={`w-full mt-2 px-4 py-2 text-black border rounded-lg focus:outline-none 
             ${errors.password ? "border-red-500" : "border-gray-300 focus:border-[#2D336B]"}`}
                 placeholder="Enter your password"
                 value={password}
@@ -139,7 +139,7 @@ export default function Signup() {
               <label className="block font-medium text-[#2D336B]">Confirm Password</label>
               <input
                 type="password"
-                className={`w-full mt-2 px-4 py-2 border rounded-lg focus:outline-none 
+                className={`w-full mt-2 px-4 py-2 text-black border rounded-lg focus:outline-none 
             ${errors.confirmPassword ? "border-red-500" : "border-gray-300 focus:border-[#2D336B]"}`}
                 placeholder="Confirm your password"
                 value={confirmPassword}

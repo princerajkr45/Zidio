@@ -5,19 +5,43 @@ import User from "../modals/userModal.js";
 
 const addTask = async (req, res) => {
     try {
-        const { title, description } = req.body;
-
-        // Create a new task
-        const newTask = new Task({ title, description });
+        const { title, description, category, priority } = req.body;
         const { id } = req.headers;
 
+        if (!title || !description) {
+            return res.status(400).json({ message: "Title and description are required" });
+        }
+
+        if (!id) {
+            return res.status(400).json({ message: "User ID is required in headers" });
+        }
+
+        const validCategories = ["work", "personal", "others"];
+        const validPriorities = ["low", "medium", "high"];
+
+        if (category && !validCategories.includes(category)) {
+            return res.status(400).json({ message: "Invalid category" });
+        }
+
+        if (priority && !validPriorities.includes(priority)) {
+            return res.status(400).json({ message: "Invalid priority" });
+        }
+
+        // Create a new task without important & complete fields
+        const newTask = new Task({
+            title,
+            description,
+            category: category || "others",
+            priority: priority || "Medium"
+        });
+
         // Save the task to the database
-        const saveTask = await newTask.save();
+        const savedTask = await newTask.save();
 
-        const taskId = saveTask._id;
+        // Add task reference to the user
+        await User.findByIdAndUpdate(id, { $push: { tasks: savedTask._id } });
 
-        await User.findByIdAndUpdate(id, { $push: { tasks: taskId._id } });
-        res.status(201).json({ message: "Task added successfully", task: newTask });
+        res.status(201).json({ message: "Task added successfully", task: savedTask });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

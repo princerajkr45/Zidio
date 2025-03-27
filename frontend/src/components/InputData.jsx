@@ -7,6 +7,8 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [errors, setErrors] = useState({});
+    const [category, setCategory] = useState("work");
+    const [priority, setPriority] = useState("medium");
 
     const validateInput = () => {
         const error = {};
@@ -31,15 +33,17 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
 
         try {
             await axios.post("http://localhost:5005/api/tasks/add-task",
-                { title, description },
+                { title, description, category, priority },  
                 { headers }
-            )
+            );
 
             setUpdateTask(prev => !prev);
 
             setInputDiv("hidden");
             setTitle('');
             setDescription('');
+            setCategory("work");   
+            setPriority("medium"); 
         } catch (error) {
             console.log(error);
         }
@@ -60,7 +64,7 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
             setInputDiv("hidden");
             setTitle('');
             setDescription('');
-            setUpdatedData({id: "", title:"", description:""})
+            setUpdatedData({ id: "", title: "", description: "" })
         } catch (error) {
             console.log(error);
         }
@@ -82,9 +86,10 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
                                 setInputDiv("hidden");
                                 setTitle("");
                                 setDescription("");
-                                setUpdatedData({id: "",title:"", description:""})
+                                setUpdatedData({ id: "", title: "", description: "" })
                             }} />
                     </div>
+                    <label className="block text-gray-300 text-sm font-medium mb-1">Title</label>
                     <input
                         type="text"
                         placeholder='Title'
@@ -93,6 +98,9 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
+                    <label className="block text-gray-300 text-sm font-medium mb-1">
+                        Description
+                    </label>
                     <textarea
                         name="description"
                         placeholder='Description'
@@ -102,11 +110,46 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
-                    {updatedData.id === "" ? 
+                    <div className="mb-4 flex items-center justify-between">
+                       <div>
+                            <label className="block text-gray-300 text-sm font-medium mb-1">Category</label>
+                            <select
+                                className="w-full p-2 outline-none rounded bg-gray-800 text-gray-200"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                            >
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                                <option value="others">Others</option>
+                            </select>
+                       </div>
+                        <div>
+                            <label className="block text-gray-300 text-sm font-medium mb-1">Priority</label>
+                            {/* <select className="w-full p-2 border rounded bg-gray-800 text-gray-200">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                {/* <option value="low">🟢 Low</option>
+                                <option value="medium">🟡 Medium</option>
+                                <option value="high">🔴 High</option> 
+                            </select> */}
+                            <select
+                                className="w-full p-2 outline-none rounded bg-gray-800 text-gray-200"
+                                value={priority}
+                                onChange={(e) => setPriority(e.target.value)}
+                            >
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+                   
+                    {updatedData.id === "" ?
                         <button className='bg-green-800 px-3 py-2 rounded w-full' onClick={handleSubmit}>Add Task</button>
 
                         : <button className='bg-green-800 px-3 py-2 rounded w-full' onClick={handleUpdate}> Update Task</button>
-                         }
+                    }
                 </div>
 
             </div>

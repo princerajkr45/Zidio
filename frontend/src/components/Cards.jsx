@@ -54,53 +54,77 @@ function Cards({ addTask, setInputDiv, data, setUpdateTask, setUpdatedData }) {
     }
 
     return (
-        <div className='grid grid-cols-3 gap-4 p-4'>
-            {data && data.map((items, i) => (
-                <div className='flex flex-col justify-between bg-gray-800 p-4 rounded-md'>
-                    <div key={i} >
-                        <h3 className='text-2xl'>{items.title}</h3>
-                        <p className='text-gray-400 my-2'>{items.description}</p>
-                    </div>
-                    <div className="mt-2 w-full flex">
-                        <button className={`${items.complete === false ? "bg-red-500" : "bg-green-800"} px-3 py-2 rounded w-3/6`}
-                            onClick={() => completeStatus(items._id)}
-                        > {items.complete == true ? "Completed" : "In Complete"}
+        <div className="grid grid-cols-3 gap-4 p-4">
+            {data &&
+                data.map((items, i) => (
+                    <div className="flex flex-col justify-between bg-gray-800 p-4  rounded-md">
+                        <div key={i}>
+                            {/* Category Badge */}
+                            <span
+                                className={`px-2 py-1 text-xs font-semibold rounded-full ${items.category === "work"
+                                        ? "bg-blue-500 text-white"
+                                        : items.category === "personal"
+                                            ? "bg-green-500 text-white"
+                                            : "bg-orange-500 text-white"
+                                    }`}
+                            >
+                                {items.category}
+                            </span>
+
+                            <h3 className="text-2xl text-white mt-2">{items.title}</h3>
+                            <p className="text-gray-400 my-2">{items.description}</p>
+
                            
-                        </button>
-                        <div className='text-white text-2xl p-2 w-3/6  bg-gray-800 flex justify-around items-center'>
+                        </div>
+
+                        <div className="mt-2 w-full flex">
                             <button
-                                onClick={() => impStatus(items._id)}
+                                className={`${items.complete === false ? "bg-red-500" : "bg-green-800"
+                                    } px-3 py-2 rounded w-3/6`}
+                                onClick={() => completeStatus(items._id)}
                             >
-                                {items.important == true ? <FaHeart className='text-red-500'/> : <CiHeart />}
-                                
+                                {items.complete == true ? "Completed" : "In Complete"}
                             </button>
-                           {addTask !== "false" && (
-                                <button className=''
-                                    onClick={() => handleUpdate(items._id, items.title, items.description)}
-                                >
-                                    <FaEdit />
+
+                            <div className="text-white text-2xl p-2 w-3/6 bg-gray-800 flex justify-around items-center">
+                                <button onClick={() => impStatus(items._id)}>
+                                    {items.important == true ? (
+                                        <FaHeart className="text-red-500" />
+                                    ) : (
+                                        <CiHeart />
+                                    )}
                                 </button>
-                           )}
-                            <button
-                                onClick={() => deleteTask(items._id)}
-                            >
-                                <MdDelete />
-                            </button>
+
+                                {addTask !== "false" && (
+                                    <button
+                                        onClick={() =>
+                                            handleUpdate(items._id, items.title, items.description)
+                                        }
+                                    >
+                                        <FaEdit />
+                                    </button>
+                                )}
+
+                                <button onClick={() => deleteTask(items._id)}>
+                                    <MdDelete />
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))
-            }
+                ))}
 
             {addTask === "true" && (
-                <button className='flex flex-col justify-center items-center bg-gray-800 p-4 rounded-md text-gray-300' onClick={() => setInputDiv("fixed")}>
-                    <IoIosAddCircle className='text-5xl' />
-                    <h2 className='text-2xl my-2'>Add Task</h2>
+                <button
+                    className="flex flex-col justify-center items-center bg-gray-800 p-4 rounded-md text-gray-300"
+                    onClick={() => setInputDiv("fixed")}
+                >
+                    <IoIosAddCircle className="text-5xl" />
+                    <h2 className="text-2xl my-2">Add Task</h2>
                 </button>
             )}
-
-
         </div>
+
+
 
     )
 }

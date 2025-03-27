@@ -7,11 +7,11 @@ import SignUp from '../pages/SignUp';
 
 
 
-export default function Dashboard() {
+export default function TaskDashboard() {
     return (
         <>
             <div className='flex h-[98vh] gap-4'>
-                <div className="w-1/6 border-r-1 border-gray-600 p-4 flex flex-col justify-between">
+                <div className="w-1/7  bg-gray-100 p-4 flex flex-col justify-between">
                     <Sidebar />
                 </div>
                 <div className=" rounded-xl w-5/6 p-4">
