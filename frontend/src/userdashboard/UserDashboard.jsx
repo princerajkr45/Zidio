@@ -38,10 +38,9 @@ const UserDashboard = () => {
             try {
                 const response = await axios.get("http://localhost:5005/api/tasks/get-all-tasks",{headers}); 
                 const taskData = response.data.data.tasks; 
-
-                console.log(response.data.data.name)
+               
                 setName(response.data.data.name);
-                console.log(name);
+            
 
                 // Count different types of tasks
                 const totalTasks = taskData.length;
@@ -78,10 +77,22 @@ const UserDashboard = () => {
         fetchTasks();
     }, []);
 
-    const handleSaveNote = () => {
+    const handleSaveNote = async() => {
         if (notes.trim()) {
-            setStoredNotes([...storedNotes, notes]);
-            setNotes(""); // Clear the input field after saving
+            try {
+                const response = await axios.post(
+                    "http://localhost:5005/api/notes/add-note",
+                    { text: notes },
+                    { headers }
+                );
+
+                if (response.status === 201) {
+                    setStoredNotes([...storedNotes, response.data.data]);
+                    setNotes("");
+                }
+            } catch (error) {
+                console.error("Error saving note:", error);
+            }
         }
     };
 
@@ -112,14 +123,9 @@ const UserDashboard = () => {
                         {activeTab === "importantTasks" && <ImportantTasks />}
                         {activeTab === "incompleteTasks" && <InCompletedTasks />}
                         {activeTab === "notes" && (
-
-
-
                             <Notes
                                 storedNotes={storedNotes}
                                 setStoredNotes={setStoredNotes}
-                                notes={notes}
-                                setNotes={setNotes}
                             />
                         )}
                         {activeTab === "setting" && <Setting />}

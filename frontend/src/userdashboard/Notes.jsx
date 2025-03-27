@@ -1,13 +1,28 @@
-// src/components/NotesTab.js
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
-const Notes = ({ storedNotes, setStoredNotes, notes, setNotes }) => {
-    const handleSaveNote = () => {
-        if (notes.trim()) {
-            setStoredNotes([...storedNotes, notes]);
-            setNotes(""); // Clear the input field after saving
+const Notes = ({ storedNotes, setStoredNotes }) => {
+
+    
+
+    useEffect(() => {
+        const headers = {
+            id: localStorage.getItem('userId'),
+            authorization: localStorage.getItem('authToken')
         }
-    };
+        
+        const fetchNotes = async () => {
+            try {
+                const response = await axios.get("http://localhost:5005/api/notes/get-notes", { headers });
+                setStoredNotes(response.data.data);
+            } catch (error) {
+                console.error("Error fetching notes:", error);
+            }
+        };
+
+        fetchNotes();
+    }, []);
+
 
     return (
         <div>
@@ -16,7 +31,7 @@ const Notes = ({ storedNotes, setStoredNotes, notes, setNotes }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 rounded-lg">
                 {storedNotes.map((note, index) => (
                     <div key={index} className="rounded-lg py-4 px-4 shadow-md">
-                        {note}
+                        {note.text}
                     </div>
                 ))}
             </div>
