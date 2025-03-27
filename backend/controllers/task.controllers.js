@@ -16,7 +16,7 @@ const addTask = async (req, res) => {
             return res.status(400).json({ message: "User ID is required in headers" });
         }
 
-        const validCategories = ["work", "personal", "others"];
+        const validCategories = ["work", "personal","urgent", "others"];
         const validPriorities = ["low", "medium", "high"];
 
         if (category && !validCategories.includes(category)) {

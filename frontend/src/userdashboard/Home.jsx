@@ -23,7 +23,7 @@ const Home = ({ tasks, taskCategories, notes, setNotes, handleSaveNote }) => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-lg">
                     {taskCategories.map((task) => (
                         <div key={task.category} className="rounded-lg p-4 text-center shadow-md">
-                            <h2 className="text-md font-medium">{task.category}</h2>
+                            <h2 className="text-md font-medium capitalize">{task.category}</h2>
                             <span className="inline-block px-3 py-1 rounded-lg text-xl font-bold mt-1">{task.count}</span>
                         </div>
                     ))}

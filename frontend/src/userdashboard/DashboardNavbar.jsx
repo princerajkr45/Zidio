@@ -1,6 +1,6 @@
 import React from 'react'
 
-function DashboardNavbar() {
+function DashboardNavbar({name}) {
     return (
         <>
             {/* <div className="flex-1 p-2 overflow-y-auto"> 
@@ -30,7 +30,7 @@ function DashboardNavbar() {
 
                 {/* User Name */}
                 <div className="">
-                    <h2 className="text-lg font-semibold sm:text-xl">Leroy Jenkins</h2>
+                    <h2 className="text-lg font-semibold sm:text-xl uppercase">{name}</h2>
                 </div>
             </div>
         </>

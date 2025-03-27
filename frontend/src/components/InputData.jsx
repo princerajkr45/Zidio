@@ -120,6 +120,7 @@ function InputData({ inputDiv, setInputDiv, setUpdateTask, updatedData, setUpdat
                             >
                                 <option value="work">Work</option>
                                 <option value="personal">Personal</option>
+                                <option value="urgent">Urgent</option>
                                 <option value="others">Others</option>
                             </select>
                        </div>
