@@ -5,6 +5,10 @@ import Notes from "./Notes";
 import Setting from "./Setting";
 import Home from "./Home";
 import DashboardNavbar from "./DashboardNavbar";
+import AllTasks from "../pages/AllTasks";
+import CompletedTasks from "../pages/CompletedTasks";
+import ImportantTasks from "../pages/ImportantTasks";
+import InCompletedTasks from "../pages/IncompletedTasks";
 
 const UserDashboard = () => {
     const [activeTab, setActiveTab] = useState("home");
@@ -55,8 +59,14 @@ const UserDashboard = () => {
                                 handleSaveNote={handleSaveNote}
                             />
                         )}
-                        {activeTab === "task" && <Task />}
+                        {activeTab === "alltasks" && <AllTasks />}
+                        {activeTab === "completedTasks" && <CompletedTasks />}
+                        {activeTab === "importantTasks" && <ImportantTasks />}
+                        {activeTab === "incompleteTasks" && <InCompletedTasks />}
                         {activeTab === "notes" && (
+
+
+
                             <Notes
                                 storedNotes={storedNotes}
                                 setStoredNotes={setStoredNotes}

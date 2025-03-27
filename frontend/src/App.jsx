@@ -16,6 +16,7 @@ import InCompletedTasks from './pages/IncompletedTasks'
 import UserDashboard from './userdashboard/UserDashboard'
 import Notes from './userdashboard/Notes'
 import Home from './userdashboard/Home'
+import Task from './userdashboard/Task'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -56,7 +57,7 @@ function App() {
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path='/user-dashboard' element={<UserDashboard />}>
+          <Route exact path='/user-dashboard' element={<UserDashboard />}>
             <Route index element={<Home />} />
             <Route path='/user-dashboard/notes' element={<Notes />} />
 

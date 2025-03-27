@@ -24,27 +24,27 @@ const Sidebar = ({ setActiveTab, activeTab }) => {
             <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
             <ul className="space-y-4">
                 <li>
-                    <button
+                    <Link to={"/user-dashboard"} 
                         onClick={() => setActiveTab("home")}
                         className="flex items-center gap-2 w-full text-left p-2 rounded hover:bg-gray-700"
                     >
                         <FaTachometerAlt />
                         Home
-                    </button>
+                    </Link>
                 </li>
                 <li>
-                    <button
+                    <Link to={""}
                         onClick={toggleTaskSubTabs}
                         className="flex items-center gap-2 w-full text-left p-2 rounded hover:bg-gray-700"
                     >
                         <FaListCheck />
                         Tasks
-                    </button>
+                    </Link>
                     {showTaskSubTabs  && (
                         <ul className="ml-4 mt-2 space-y-2">
                             <li>
                                 <button
-                                    onClick={() => setActiveTab("allTasks")}
+                                    onClick={() => setActiveTab("alltasks")}
                                     className="flex items-center gap-3 w-full text-left p-2 rounded hover:bg-gray-700"
                                 >
                                     <CgNotes />
@@ -62,7 +62,7 @@ const Sidebar = ({ setActiveTab, activeTab }) => {
                             </li>
                             <li>
                                 <button
-                                    onClick={() => setActiveTab("importantTasks")}
+                                    onClick={() => setActiveTab("incompleteTasks")}
                                     className="flex items-center gap-2 w-full text-left p-2 rounded hover:bg-gray-700"
                                 >   
                                     <TbNotebookOff className="text-xl"/>
