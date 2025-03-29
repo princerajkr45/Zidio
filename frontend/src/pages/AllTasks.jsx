@@ -8,7 +8,8 @@ function AllTasks() {
 
   const [inputDiv, setInputDiv] = useState("hidden");
   const [updateTask, setUpdateTask] = useState(false);
-  const [updatedData, setUpdatedData] = useState({ id: "", title: "", description: "" })
+  const [updatedData, setUpdatedData] = useState({ id: "", title: "", description: "" });
+  const [viewMode, setViewMode] = useState('card');
 
   const [Data, setData] = useState('')
 
@@ -33,12 +34,23 @@ function AllTasks() {
 
   return (
     <>
+
+      <div className="flex justify-end p-4">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-md"
+          onClick={() => setViewMode(viewMode === 'table' ? 'card' : 'table')}
+        >
+          Toggle View
+        </button>
+      </div>
+      {/* <Cards addTask={"false"} data={Data} viewMode={viewMode} /> */}
       <Cards
         addTask={"true"}
         setInputDiv={setInputDiv}
         data={Data.tasks}
         setUpdateTask={setUpdateTask}
         setUpdatedData={setUpdatedData}
+        viewMode={viewMode}
       />
       <InputData
         inputDiv={inputDiv}

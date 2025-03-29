@@ -4,7 +4,8 @@ import axios from 'axios'
 
 function InCompletedTasks() {
 
-  const [Data, setData] = useState('')
+  const [Data, setData] = useState('');
+  const [viewMode, setViewMode] = useState('card');
 
   const headers = {
     id: localStorage.getItem('userId'),
@@ -25,7 +26,15 @@ function InCompletedTasks() {
 
   return (
     <div>
-      <Cards addTask={"false"} data={Data} />
+      <div className="flex justify-end p-4">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-md"
+          onClick={() => setViewMode(viewMode === 'table' ? 'card' : 'table')}
+        >
+          Toggle View
+        </button>
+      </div>
+      <Cards addTask={"false"} data={Data} viewMode={viewMode} />
     </div>
   )
 }
