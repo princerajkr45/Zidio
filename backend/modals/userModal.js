@@ -21,7 +21,11 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             ref: 'Task'
         },
-    ]
+    ],
+    profile:{
+        type: String,
+        default: "default.png"
+    }
 
 }, { timestamps: true });
 
